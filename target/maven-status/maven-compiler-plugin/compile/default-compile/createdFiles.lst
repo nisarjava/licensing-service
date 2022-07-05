@@ -1,0 +1,3 @@
+com\nisar\licenses\model\License.class
+com\nisar\licenses\AppStartup.class
+com\nisar\licenses\controllers\LicenseServiceController.class
