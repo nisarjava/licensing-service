@@ -1,2 +1,16 @@
-management.endpoint.health.show-details: "ALWAYS"
-management.endpoints.web.exposure.include: "*"
+spring:
+  config:
+    import: configserver:http://localhost:8888/licensingservice/
+example.property: hello
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    loggers:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
