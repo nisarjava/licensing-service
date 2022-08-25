@@ -1,3 +1,5 @@
+server:
+  port: 8008
 spring:
   application:
     name: LicensingService
@@ -17,6 +19,33 @@ spring:
      serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 example.property: hello
+
+resilience4j:
+ circuitbreaker:
+  instances:
+    getLicensesByOrg:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+ retry:
+   instances:
+     getLicensesByOrg:
+       registerHealthIndicator: true
+       maxRetryAttempts: 3
+       waitDuration: 5s
+ rateLimiter:
+   instances:
+     getLicensesByOrg:
+       registerHealthIndicator: true
+       limitForPeriod: 10
+       limitRefreshPeriod: 10s
+       timeoutDuration: 10s
 management:
   endpoint:
     metrics:

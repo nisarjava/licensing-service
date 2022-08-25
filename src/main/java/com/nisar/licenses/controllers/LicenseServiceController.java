@@ -3,6 +3,7 @@ package com.nisar.licenses.controllers;
 import com.nisar.licenses.config.ServiceConfig;
 import com.nisar.licenses.domain.License;
 import com.nisar.licenses.services.LicenseService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,9 @@ public class LicenseServiceController {
     private ServiceConfig serviceConfig;
 
     @RequestMapping(value="/",method = RequestMethod.GET)
-    public List<License> getLicenses(@PathVariable("organizationId") String organizationId) {
 
+    public List<License> getLicenses(@PathVariable("organizationId") String organizationId) {
+        System.out.println("HHHh");
         return licenseService.getLicensesByOrg(organizationId);
     }
 
